@@ -65,6 +65,14 @@ class App {
       const correctCount = lotto.filter((number) => winNumbers.includes(number)).length;
       const bonus = lotto.includes(bonusNumber);
 
+      /** 일치 번호 세기:
+      •	filter 메서드는 winNumbers에 포함된 번호들만 추출한 새로운 배열을 생성합니다.
+      •	length 속성은 이 배열의 길이를 반환합니다. 즉, 몇 개의 번호가 일치하는지를 세는 거예요.
+      •	예를 들어, lotto = [3, 15, 23, 28, 33, 44]이고 winNumbers = [3, 15, 23, 33]일 때,
+      lotto.filter((number) => winNumbers.includes(number))는 [3, 15, 23, 33]을 반환하고,
+      length는 4가 됩니다. 이는 4개의 번호가 일치했음을 의미합니다.
+      * */
+
       if (correctCount === 3) lottoResult.fifth += 1;
       if (correctCount === 4) lottoResult.fourth += 1;
       if (correctCount === 5 && bonus) lottoResult.second += 1;
@@ -81,6 +89,7 @@ class App {
       totalProfit += lottoResult[key] * WINNING_PRICE[key];
     }
     return ((totalProfit / purchasePrice) * 100).toFixed(1);
+    // toFixed(1)은 소수점 첫째 자리에서 반올림해서 결과를 문자열로 반환합니다. 예를 들어, 50.245%는 50.2%로 반올림
   }
 
   printResult(results, profitRate) {
